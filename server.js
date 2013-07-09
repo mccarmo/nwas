@@ -36,5 +36,5 @@ io.sockets.on('connection', function (socket) {
 	});
 })
 
-server.listen(5000)
-console.log("listening on port 5000...")
+server.listen(process.env.PORT || 5000)
+console.log("listening on port"+process.env.PORT || 5000+"...")
