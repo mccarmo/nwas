@@ -8,6 +8,17 @@ $(document).ready(function(){
 	  try {
 	    window.AudioContext = window.AudioContext||window.webkitAudioContext;
 	    context = new AudioContext();
+	    
+	    $(".togglePlay").on("mouseover",function(){
+			oscillator = context.createOscillator();
+			oscillator.connect(context.destination);
+			oscillator.type = 0; //sine wave
+			oscillator.frequency.value = $(this).data("freq"); //hertz
+			oscillator.start(0);
+		})
+		$(".togglePlay").on("mouseout",function(){
+			oscillator.stop(0);
+		})
 	  }
 	  catch(e) {
 	    alert('Web Audio API is not supported in this browser');
@@ -29,16 +40,5 @@ $(document).ready(function(){
 	} else {
 	  alert('getUserMedia() is not supported in your browser');
 	}
-	
-	$(".play").on("click",function(){
-		oscillator = context.createOscillator();
-		oscillator.connect(context.destination);
-		oscillator.type = 0; //sine wave
-		oscillator.frequency.value = 440; //hertz
-		oscillator.start(0);
-	})
     
-	$(".stop").on("click",function(){
-		oscillator.stop(0);
-	})
 });
