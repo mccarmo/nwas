@@ -36,5 +36,5 @@ io.sockets.on('connection', function (socket) {
 	});
 })
 
-server.listen(8000)
-console.log("listening on port 8000...")
+server.listen(5000)
+console.log("listening on port 5000...")
