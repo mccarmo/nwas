@@ -36,5 +36,5 @@ io.sockets.on('connection', function (socket) {
 	});
 })
 
-server.listen(8080)
-console.log("listening on port 8080...")
+server.listen(8000)
+console.log("listening on port 8000...")
