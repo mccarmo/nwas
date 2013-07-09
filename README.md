@@ -1,1 +1,1 @@
-Node.js WebAudio Server = NWAS
+Exemplo Node.js + WebAudio + Socket.io 
