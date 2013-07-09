@@ -2,6 +2,20 @@ $(document).ready(function(){
     
     var context;
     var oscillator;
+    var server = io.connect();
+    
+    function playSound(data) {
+    	oscillator = context.createOscillator();
+		oscillator.connect(context.destination);
+		oscillator.type = oscillator.SINE;
+		oscillator.frequency.value = data; //hertz
+		oscillator.detune.value = Math.pow(2, 1/12) * 10; 
+		oscillator.start(0);
+    }
+    
+    function stopSound() {
+    	oscillator.stop(0);
+    }
     
     //Dica de: http://www.html5rocks.com/en/tutorials/getusermedia/intro/
 	function init(input) {
@@ -10,15 +24,12 @@ $(document).ready(function(){
 	    context = new AudioContext();
 	 
 	    $(".togglePlay").on("mouseover",function(){
-			oscillator = context.createOscillator();
-			oscillator.connect(context.destination);
-			oscillator.type = oscillator.SINE;
-			oscillator.frequency.value = $(this).data("freq"); //hertz
-			oscillator.detune.value = Math.pow(2, 1/12) * 10; 
-			oscillator.start(0);
+	    	server.emit("play", $(this).data("freq"));
+	    	playSound($(this).data("freq"));
 		})
 		$(".togglePlay").on("mouseout",function(){
-			oscillator.stop(0);
+			server.emit("stop",$(this).data("freq"));
+			stopSound();
 		})
 	  }
 	  catch(e) {
@@ -42,4 +53,16 @@ $(document).ready(function(){
 	  alert('getUserMedia() is not supported in your browser');
 	}
     
+	server.on("play", function(data) {
+		playSound(data);
+		$("li[data-freq='"+data+"']").find("a").removeClass("stoped");
+		$("li[data-freq='"+data+"']").find("a").addClass("played");
+		
+	});
+	
+	server.on("stop", function(data) {
+		stopSound();
+		$("li[data-freq='"+data+"']").find("a").removeClass("played");
+		$("li[data-freq='"+data+"']").find("a").addClass("stoped");
+	});
 });

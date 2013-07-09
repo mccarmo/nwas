@@ -31,10 +31,15 @@ io.configure(function () {
 
 io.sockets.on('connection', function (socket) {
 	console.log("socket connected...")
-	socket.on("msg",function(msg){
-		console.log(msg)
+	socket.on("play",function(data){
+		socket.broadcast.emit("play",data);
+		console.log("playing: " + data);
+	});
+	socket.on("stop",function(data){
+		socket.broadcast.emit("stop",data);
+		console.log("Stop: " + data);
 	});
 })
 
 server.listen(process.env.PORT || 8080)
-console.log("listening on port"+process.env.PORT || 8080+"...")
+console.log("Server starded...")

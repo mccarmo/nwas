@@ -45,3 +45,22 @@ body {
 	-o-transition: all .3s ease-in-out;
 	transition: all .3s ease-in-out;
 }
+
+.played {
+	color: #FFFFFF;
+	background: #0E888C;
+}
+
+.stoped {
+	text-decoration:none;
+	padding: 5px 11px;
+	color: #64645d;
+	text-shadow: 1px 1px 1px #fff;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
