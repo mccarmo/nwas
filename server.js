@@ -26,6 +26,11 @@ app.get('/jquery', function (request, response) {
 
 var io = socketio.listen(server);
 
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+
 io.sockets.on('connection', function (socket) {
 	console.log("socket connected...")
 	socket.on("msg",function(msg){
