@@ -37,7 +37,7 @@ $(document).ready(function(){
 	  }
 	}
 	
-	function hasGetUserMedia() {
+	/*function hasGetUserMedia() {
 	  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
 	            navigator.mozGetUserMedia || navigator.msGetUserMedia);
 	}
@@ -51,7 +51,7 @@ $(document).ready(function(){
 	    })
 	} else {
 	  alert('getUserMedia() is not supported in your browser');
-	}
+	}*/
     
 	server.on("play", function(data) {
 		playSound(data);
@@ -65,4 +65,6 @@ $(document).ready(function(){
 		$("li[data-freq='"+data+"']").find("a").removeClass("played");
 		$("li[data-freq='"+data+"']").find("a").addClass("stoped");
 	});
+	
+	init();
 });
